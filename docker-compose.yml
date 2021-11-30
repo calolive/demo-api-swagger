@@ -1,0 +1,17 @@
+version: '3'
+services:
+  php:
+    build: ./php
+    ports:
+      - '8080:80'
+    working_dir: /var/www/html
+    volumes:
+      - ./php/src:/var/www/html:cached # <--- This will map ./php to /var/www/html inside the container.
+  composer:
+    restart: 'no'
+    image: composer/composer
+    command: install
+    volumes:
+      - ./php/src:/app
+    depends_on:
+      - php

@@ -1,0 +1,10 @@
+{ "actorId" : 0, 
+   "time" : 0,
+   "profile": "sign_contract",
+   "parameters" : { 
+        "contract_definition_id": 0,
+        "customer_id" : 0,
+        "contract_id" : 0,
+        "contractor_id" : 0
+   }
+}

@@ -1,0 +1,111 @@
+{
+  "customer": {
+    "number": "64",
+    "mode": 2,
+    "contractor_id": -1,
+    "vendor": " hosteur-sandbox-fo@calindasoftware.com",
+    "fields": [
+      {
+        "key": "firstname",
+        "value": "Marc"
+      },
+      {
+        "key": "lastname",
+        "value": "Testeriniar"
+      },
+      {
+        "key": "civility",
+        "value": "MONSIEUR"
+      },
+      {
+        "key": "cellPhone",
+        "value": "0750201485"
+      },
+      {
+        "key": "email",
+        "value": "testermarc@yopmail.com"
+      }
+    ]
+  },
+  "contractors": [
+    {
+      "mode": 1,
+      "id": -1,
+      "role": "rl1",
+      "fields": [
+        {
+          "key": "firstname",
+          "value": "Maurice"
+        },
+        {
+          "key": "lastname",
+          "value": "Vtester"
+        },
+        {
+          "key": "civility",
+          "value": "MONSIEUR"
+        },
+        {
+          "key": "email",
+          "value": "s.haizoun@ymag.fr"
+        }
+      ]
+    },
+    {
+      "mode": 2,
+      "id": -1,
+      "role": "rl2",
+      "fields": [
+        {
+          "key": "firstname",
+          "value": "Marcelline"
+        },
+        {
+          "key": "lastname",
+          "value": "Vtester2"
+        },
+        {
+          "key": "civility",
+          "value": "MADAME"
+        },
+        {
+          "key": "email",
+          "value": "vtester2@yopmail.com"
+        }
+      ]
+    }
+  ],
+  "contract": {
+    "contract_definition_id": 29402,
+    "pdf_file_path": "billet.pdf",
+    "contract_id": -1,
+    "message_title": "Consentement éclairé pour signature",
+    "message_body": "Vous trouverez ci-joint le consentement éclairé à nous retourner signé"
+  },
+  "contract_properties": [
+    {
+      "key": "internal_contract_id",
+      "value": "616",
+      "to_fill_by_user": 0
+    },
+    {
+      "key": "callback:url",
+      "value": "https://mycustomer.com/callback_pdf/<id>"
+    },
+    {
+      "key": "medecinName",
+      "value": "Allegre"
+    },
+    {
+      "key": "medecinFirstname",
+      "value": "Laurent"
+    },
+    {
+      "key": "contract_type",
+      "value": "consentement_eclaire"
+    }
+  ],
+  "files": [],
+  "options": [],
+  "to_sign": 1
+}
