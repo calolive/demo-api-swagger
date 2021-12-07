@@ -35,19 +35,18 @@ build the docker image
 
 Launch the container
 
-When you point your browser to the demo web page, you can see 4 buttons
+When you point your browser to the demo web page, you can see 5 buttons
 
 * Create contract : creates one contract with 1 document and 2 recipients
-* Autoclose : toggles the auto-validation (automatic countersignature) mode of the contract to 'on'
 * Get status : retreives the contrat status (OPEN, SINED, ARCHIVED, ABANDONNED)
-* Get signed contrat : downloads and display the signed contrat
+* Sign contracts : redirects to the contract signature page
+* Sign contract if : loads the signature page into an iframe
+* Download signed contract: downloads the signed contract into an iframe
 
-Autoclose and Get Status should be cliked after the contract creation.
+Get Status should be cliked after the contract creation.
 
-Get signed contract should be clicked after contract signature and validation (validation is not necessary if autoclose was cliked before the signature).
+Sign contract should be clicked after having selected a signatory in the combo box (next to Get status)
+
+Get signed contract should be clicked after all the signatories have signed.
 
 Otherwise, you wil get error messages.
-
-### Other
-
-The 'doc-other -methods' file contains examples of extra api calls. The API calls contained in that file are not actually implemented in the demo app.
