@@ -6,7 +6,6 @@ use GuzzleHttp\Exception\RequestException;
 include('utils.php');
 
 session_start();
-$base_url = $_SESSION['base_url'];
 $token = $_SESSION['token'];
 $cdi = $_SESSION['cdi'];
 $contractor_id = $_SESSION['contractor_id'];
@@ -57,8 +56,8 @@ class Recipients {
 }
 
 $contract = new Contract($cdi);
-$recipient1 = new Recipient("MONSIEUR", "Olivier", "Mathieu", "rue Bombée", "0662370619", "omathieu+567@calindasoftware.com", 3);
-$recipient2 = new Recipient("MONSIEUR", "John", "Doe", "rue plate", "0662370619", "omathieu+436@calindasoftware.com", 3);
+$recipient1 = new Recipient("MONSIEUR", "Olivier", "Mathieu", "rue Bombée", "0662370619", "omathieu+567@calindasoftware.com", 10);
+$recipient2 = new Recipient("MONSIEUR", "John", "Doe", "rue plate", "0662370619", "omathieu+436@calindasoftware.com", 10);
 //$recipients = new Recipients(array($recipient1), array($recipient2));
 $recipients = new Recipients(array($recipient1, $recipient2));
 var_error_log(json_encode($recipients));

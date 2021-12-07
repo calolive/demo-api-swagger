@@ -1,7 +1,7 @@
 <?php
     session_start();
 
-    $_SESSION['base_url_swagger'] = "https://api.sellandsign.com.com/api/v4";
+    $_SESSION['base_url_swagger'] = "https://api.sellandsign.com/api/v4";
     $_SESSION['token'] = "";
     $_SESSION['cdi'] = 0;
     $_SESSION['contractor_id'] = 0;
@@ -17,14 +17,13 @@
         <br><br>
         <div style="text-align: center">
            <button onclick="send_request('create-contract4.php')">Create contrat</button>
-           <button onclick="send_request('autoclose.php')">Autoclose</button>
-           <button onclick="send_request('get-status.php')">Get status</button>
+           <button onclick="send_request('get-status4.php')">Get status</button>
            <select id="generate" onChange="generateOnSelect(this)">
                 <option value="" disabled selected>Create token</option>
             </select>
            <button onclick="redirect_to_sign()">Sign contract</button>
            <button onclick="disp_sign_iframe()">Sign contract if</button>
-           <button onclick="send_request('get-signed-contract.php')">Download signed contract</button>      
+           <button onclick="send_request('get-signed-contract4.php')">Download signed contract</button>      
         </div>
         <br><br>
         <div id="messagediv"></div>
@@ -44,7 +43,7 @@
                             const iframe = document.getElementById('iframediv');
                             let message = document.getElementById('messagediv');
 
-                            if (endpoint === 'get-signed-contract.php') {
+                            if (endpoint === 'get-signed-contract4.php') {
                                 if (myjson.code == 200) {
                                     message.innerHTML =  "";
                                     iframe.innerHTML = `<iframe src="${myjson.pdffile}" height="100%" width="100%"></iframe>`;
@@ -105,7 +104,8 @@
                 const success = encodeURIComponent('https://www.google.com');
                 const error = encodeURIComponent('https://bing.com');
                 const encoded = encodeURIComponent(infos.token);
-                const url = `https://qacss.calindasoftware.com/calinda/sellandsign/#/contract/${infos.contract_id}/sign;c_id=${infos.contract_id};no_ui=true;refback=${success};errorback=${error};j_token=${encoded}`;
+                //const url = `https://qacss.calindasoftware.com/calinda/sellandsign/#/contract/${infos.contract_id}/sign;c_id=${infos.contract_id};no_ui=true;refback=${success};errorback=${error};j_token=${encoded}`;
+                const url = `https://120.ota.cloud.sellandsign.com/calinda/sellandsign/#/contract/${infos.contract_id}/sign;c_id=${infos.contract_id};no_ui=true;refback=${success};errorback=${error};j_token=${encoded}`;
                 console.log(infos.contract_id);
                 console.log(contractor);
                 //location.href = url;
