@@ -60,6 +60,7 @@ $recipient1 = new Recipient("MONSIEUR", "Olivier", "Mathieu", "rue Bombée", "06
 $recipient2 = new Recipient("MONSIEUR", "John", "Doe", "rue plate", "0662370619", "omathieu+436@calindasoftware.com", 10);
 //$recipients = new Recipients(array($recipient1), array($recipient2));
 $recipients = new Recipients(array($recipient1, $recipient2));
+//$recipients = new Recipients(array($recipient1));
 var_error_log(json_encode($recipients));
 
 $payload = [

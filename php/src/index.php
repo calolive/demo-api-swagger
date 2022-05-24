@@ -3,9 +3,10 @@
 
     $_SESSION['base_url_swagger'] = "https://api.sellandsign.com/api/v4";
     $_SESSION['token'] = "";
-    $_SESSION['cdi'] = 0;
+    $_SESSION['cdi'] = 	0;
     $_SESSION['contractor_id'] = 0;
     $_SESSION['actor_id'] = 0;
+    
 ?>
 <!DOCTYPE html>
 <html>
@@ -13,11 +14,11 @@
         <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     </head>
     <body>
-        <img src="https://www.docker.com/sites/default/files/horizontal.png">
+        <img src="https://www.doasoft.com/assets/img/zlogoinv60x60.png">
         <br><br>
         <div style="text-align: center">
            <button onclick="send_request('create-contract4.php')">Create contrat</button>
-           <button onclick="send_request('get-status4.php')">Get status</button>
+           <button onclick="send_request('oneexpert.php')">Get status</button>
            <select id="generate" onChange="generateOnSelect(this)">
                 <option value="" disabled selected>Create token</option>
             </select>
@@ -105,7 +106,7 @@
                 const error = encodeURIComponent('https://bing.com');
                 const encoded = encodeURIComponent(infos.token);
                 //const url = `https://qacss.calindasoftware.com/calinda/sellandsign/#/contract/${infos.contract_id}/sign;c_id=${infos.contract_id};no_ui=true;refback=${success};errorback=${error};j_token=${encoded}`;
-                const url = `https://120.ota.cloud.sellandsign.com/calinda/sellandsign/#/contract/${infos.contract_id}/sign;c_id=${infos.contract_id};no_ui=true;refback=${success};errorback=${error};j_token=${encoded}`;
+                const url = `https://cloud.sellandsign.com/calinda/sellandsign/#/contract/${infos.contract_id}/sign;c_id=${infos.contract_id};no_ui=true;refback=${success};errorback=${error};j_token=${encoded}`;
                 console.log(infos.contract_id);
                 console.log(contractor);
                 //location.href = url;

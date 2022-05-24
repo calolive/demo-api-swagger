@@ -35,6 +35,7 @@ class Parameters {
 }
 
 $parameters = new Parameters($actor_id, $cdi, $contractor_id, round(microtime(true) * 1000) + 3000000);
+//parameters = new Parameters($actor_id, $cdi, -1, round(microtime(true) * 1000) + 3000000);
 //$parameters = new Parameters($actor_id, $cdi, $contractor_id);
 
 //Create token -----------------------------------------------------------------------------
