@@ -1,7 +1,6 @@
 <?php 
 
-//$token = 'TSRT|f0BRuVDTwTrE+k0KvqOSOq6o98WjGJId7s6dSPGeX5E='; - one expert
-$token = '5699057|Vj3+FTGhY/FJIk3H5pO9c/4oZJU7VfFBD8wmq8IpypU=';
+$token = '';
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
@@ -17,8 +16,8 @@ curl_setopt_array($curl, array(
   CURLOPT_CUSTOMREQUEST => 'POST',
   CURLOPT_POSTFIELDS => array('contract' => '{
 	  "name": "use_case_3_1",
-	  "contract_definition_id": 43062,
-	  "vendor_email": "omathieu@calindasoftware.com",
+	  "contract_definition_id": 0,
+	  "vendor_email": "admin@calindasoftware.com",
 	  "message_title": "Essai-Here is your contract",
 	  "message_body": "Test-We are pleased to sen you your contract ...",
 	  "keep_on_move": false,
@@ -36,8 +35,8 @@ curl_setopt_array($curl, array(
 		  "address_2": "",
 		  "postal_code": "75001",
 		  "city": "Paris",
-		  "cell_phone": "0662370619",
-		  "email": "omathieu+789@calindasoftware.com",
+		  "cell_phone": "06",
+		  "email": "admin+789@calindasoftware.com",
 		  "signature_mode": 12
 		}
 	  ]

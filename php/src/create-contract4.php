@@ -81,7 +81,7 @@ $payload = [
         ],
         [
             'name' => 'pdfparts',
-            'contents' => fopen(__DIR__.'/resources/billet.pdf', 'r'),
+            'contents' => fopen(__DIR__.'/resources/smartpacte2.pdf', 'r'),
             'filename' => 'contrat.pdf',
             'headers' => ['Content-type' => 'application/pdf']
         ]

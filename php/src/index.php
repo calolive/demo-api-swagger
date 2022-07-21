@@ -3,7 +3,7 @@
 
     $_SESSION['base_url_swagger'] = "https://api.sellandsign.com/api/v4";
     $_SESSION['token'] = "";
-    $_SESSION['cdi'] = 	0;
+    $_SESSION['cdi'] = 0;
     $_SESSION['contractor_id'] = 0;
     $_SESSION['actor_id'] = 0;
     
@@ -33,6 +33,7 @@
     <script>
             var infos = null;
             var contractor = null;
+            var lid = 19248 //Put your licence id here
             function send_request(endpoint) {
                 var objXMLHttpRequest = new XMLHttpRequest();
                 objXMLHttpRequest.onreadystatechange = function() {
@@ -97,7 +98,7 @@
                 const iframe = document.getElementById('iframediv');
                 message.innerHTML = "";
                 const encoded = encodeURIComponent(infos.token);
-                const url = `https://cloud.sellandsign.com/calinda/s/generic_sign_contract_index.html?l_id=1933&direct_contract=${infos.cdi}&cd_id=${infos.cdi}&c_id=${infos.contract_id}&customer_number=${contractor}&page=1&no_ui=true&j_token=${encoded}`;                              
+                const url = `https://cloud.sellandsign.com/calinda/s/generic_sign_contract_index.html?l_id=${lid}&direct_contract=${infos.cdi}&cd_id=${infos.cdi}&c_id=${infos.contract_id}&customer_number=${contractor}&page=1&no_ui=true&j_token=${encoded}`;                              
                 iframe.innerHTML = `<iframe width="1024" height="800" src="${url}"></iframe>`;
             }
 
