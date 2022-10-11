@@ -63,7 +63,7 @@
                             infos.token = myjson.response;
                         }
                         else if (endpoint.startsWith('/createcontractallinone')) {
-                            infos = myjson.response;
+                            infos = myjson;
                             fillSelect();
                         }
                     }
@@ -80,7 +80,7 @@
     function fillSelect() {
         let select = document.getElementById('generate');
       
-        infos.contractors.forEach((c) => {
+        infos.recipients.forEach((c) => {
             let opt = document.createElement('option');
             opt.value = c.id;
             opt.innerHTML = c.lastname;
@@ -92,7 +92,7 @@
 
     function generateOnSelect(select_object) {
         contractor = select_object.value;
-        send_request(`create-token4.php?contractor=${contractor}`);
+        send_request(`/generatetoken?cid=${infos.contract.contract_id}&recipientid=${contractor}`);
     }
 
     function disp_sign_iframe() {

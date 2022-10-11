@@ -33,7 +33,7 @@ import com.google.gson.JsonObject;
 public class DemoController {
     //String base_url = "https://luhman.calindasoftware.com/api/v4";
     String base_url = "https://api.sellandsign.com/api/v4";
-    String token = "5699057|a1TmrUbPfBhv1P3CMqSoi4H5m3c/wIK45StECmBRuKI=";
+    String token = "";
     long cdi = 34422;
     long actor_id = 1209262;
    
@@ -190,11 +190,12 @@ public String temptoken(@RequestParam String cid, @RequestParam String recipient
     HttpPost request = new HttpPost(url);
     request.addHeader("accept", "application/json");
     request.addHeader("j_token", token);
+    request.addHeader("Content-Type", "application/json");
     
     HashMap<String, Object> mypayload = new HashMap<String, Object>();
-    mypayload.put("actor_id", 1209262);
-    mypayload.put("contract_definition_id", 34422);
-    mypayload.put("recipient_id", recipientid);
+    mypayload.put("actor_id", actor_id);
+    mypayload.put("contract_definition_id", cdi);
+    mypayload.put("recipient_id", Integer.parseInt(recipientid));
     mypayload.put("validity_duration", 1667170800);
     var gson = new Gson();
     String jpayload = gson.toJson(mypayload);
