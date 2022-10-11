@@ -33,10 +33,10 @@ import com.google.gson.JsonObject;
 public class DemoController {
     //String base_url = "https://luhman.calindasoftware.com/api/v4";
     String base_url = "https://api.sellandsign.com/api/v4";
-    String token = "";
-    long cdi = 1;
-    long actor_id = 11;
-    private HttpClient httpclient = HttpClients.createDefault();
+    String token = "5699057|a1TmrUbPfBhv1P3CMqSoi4H5m3c/wIK45StECmBRuKI=";
+    long cdi = 34422;
+    long actor_id = 1209262;
+   
 
     /**
      * @param c_id
@@ -184,7 +184,7 @@ public String addcontract(@RequestParam String cid) throws ParseException, IOExc
  * @throws IOException
  */
 @GetMapping(value="/generatetoken")
-public String temptoken(@RequestParam String cid, Object recipientid) throws ParseException, IOException {
+public String temptoken(@RequestParam String cid, @RequestParam String recipientid) throws ParseException, IOException {
     String url = "https://api.sellandsign.com/api/v4/contracts/" + cid + "/transaction/temporarytoken";
 
     HttpPost request = new HttpPost(url);

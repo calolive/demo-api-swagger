@@ -11,18 +11,18 @@
      <input id="fileinput" type="file" name="files" multiple style="display:none" />
     <label id="fileinputlabel" for="fileinput" style="border:1px solid rgb(118, 118, 118);border-radius:3px;padding-bottom:2px;padding-left:6px;padding-right:6px;background-color:rgb(239, 239, 239)">Create contract</label>
     <button onclick="send_request('create-contract4.php')">Create contrat</button>
-    <select id="generate" onChange="generateOnSelect(this)" style="background-color:rgb(239, 239, 239);padding-top:1px;padding-bottom:1px;border-radius:2px">
-        <option value="" disabled selected>Create token</option>
-    </select>
     <button onclick="redirect_to_sign()">Sign contract</button>
     <button onclick="disp_sign_iframe()">Sign contract if</button>
     <button onclick="send_request('get-signed-contract4.php')">Download signed contract</button>-->
     <button onclick="send_request('/createcontractallinone')">Create a contract all in one</button>
-    <button onclick="send_request('/createcontract')">Create a contract step by step</button>
+    <!--<button onclick="send_request('/createcontract')">Create a contract step by step</button> -->
+    <select id="generate" onChange="generateOnSelect(this)" style="background-color:rgb(239, 239, 239);padding-top:1px;padding-bottom:1px;border-radius:2px">
+        <option value="" disabled selected>Create token</option>
+    </select>
     <button onclick="send_request('/adddocument?cid=' + cid)">Add document to a contract</button>
     <button onclick="send_request('/status')">Get status</button>
     <button onclick="send_request('/test2')">Get list of recipients</button>
-    <button onclick="send_request('/generatetoken?cid' + cid + '/recipientid' + recipientid)">Generate a temporary token</button>
+    
 
 </div>
 <br><br>
@@ -55,12 +55,6 @@
                         }
                     }
                     else {
-                        if(endpoint === '/createcontract'){
-                            cid = myjson.contract_id;
-                        }
-                        if(endpoint === '/createcontract'){
-                            recipientid = myjson.infos.reicpients[0].id;
-                        }
                         iframe.innerHTML = "";
                         let resp_string = JSON.stringify(myjson, null, 2);
                         console.log(resp_string);
@@ -85,6 +79,7 @@
 
     function fillSelect() {
         let select = document.getElementById('generate');
+      
         infos.contractors.forEach((c) => {
             let opt = document.createElement('option');
             opt.value = c.id;
