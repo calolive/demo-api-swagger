@@ -7,6 +7,7 @@ It contains examples of sequences of API calls to implement a standard document 
 As of today, examples are provided in the following programming languages:
 
 * PHP
+* JAVA
 
 
 ### Getting started ###
