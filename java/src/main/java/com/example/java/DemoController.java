@@ -1,5 +1,4 @@
 package com.example.java;
-
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -34,10 +33,87 @@ public class DemoController {
     //String base_url = "https://luhman.calindasoftware.com/api/v4";
     String base_url = "https://api.sellandsign.com/api/v4";
     String token = "";
-    long cdi = 34422;
-    long actor_id = 1209262;
+    long cdi = 0;
+    long actor_id = 0;
    
+//[POST] Create a contrcat all in one
 
+@GetMapping("/createcontractallinone")
+public String mynewtest() throws IOException {
+    String url = "https://api.sellandsign.com/api/v4/contracts/allinone?start=true";
+
+    HttpPost request = new HttpPost(url);
+    request.addHeader("accept", "application/json");
+    request.addHeader("j_token", token);
+    //request.addHeader("Content-Type", "application/json");
+    //request.addHeader("Content-Type", "multipart/form");
+
+    MultipartEntityBuilder builder = MultipartEntityBuilder.create();
+    builder.addTextBody("contract", "{\"name\": \"contract.pdf\",\"contract_definition_id\": 34422,\"vendor_email\": \"fo@calindasoftware.com\",\"message_title\": \"Votre document pour signature\",\"message_body\": \"Vous êtes signataire du contrat ci-après\",\"keep_on_move\": false, \"auto_close\": 1}");
+    builder.addTextBody("recipients", "{\"data\": [{\"civility\": \"MONSIEUR\",\"firstname\": \"Khalil\",\"lastname\": \"BHS\",\"address_1\": \"Rue de test\",\"address_2\": \"\",\"postal_code\": \"20156\",\"city\": \"\",\"cell_phone\": \"0021651353584\",\"email\": \"k.salah@oodrive.com\",\"signature_mode\": 10}]}");
+    File file = ResourceUtils.getFile("classpath:static/contract.pdf");
+    InputStream allinone = new FileInputStream(file);
+    builder.addBinaryBody("pdfparts", allinone, ContentType.create("application/pdf"), file.getName());
+
+    HttpEntity multipart = builder.build();
+    request.setEntity(multipart);
+
+    String result = "";
+        
+    try (CloseableHttpClient httpClient = HttpClients.createDefault();
+         CloseableHttpResponse httpResponse = httpClient.execute(request);) {
+            HttpEntity response_entity = httpResponse.getEntity();
+            if (response_entity != null) {
+                result = EntityUtils.toString(response_entity);
+            }
+            else {
+                result = "{\"Error\":\"An error occured\"}";
+            }
+         }
+    return result;
+    }
+
+    //[POST] Create a temporary token
+/**
+ * @param cid
+ * @param recipientid 
+ * @return
+ * @throws ParseException
+ * @throws IOException
+ */
+@GetMapping(value="/generatetoken")
+public String temptoken(@RequestParam String cid, @RequestParam String recipientid) throws ParseException, IOException {
+    String url = "https://api.sellandsign.com/api/v4/contracts/" + cid + "/transaction/temporarytoken";
+
+    HttpPost request = new HttpPost(url);
+    request.addHeader("accept", "application/json");
+    request.addHeader("j_token", token);
+    request.addHeader("Content-Type", "application/json");
+    
+    HashMap<String, Object> mypayload = new HashMap<String, Object>();
+    mypayload.put("actor_id", actor_id);
+    mypayload.put("contract_definition_id", cdi);
+    mypayload.put("recipient_id", Integer.parseInt(recipientid));
+    mypayload.put("validity_duration", 1667170800);
+    var gson = new Gson();
+    String jpayload = gson.toJson(mypayload);
+    StringEntity se = new StringEntity(jpayload, "UTF-8");
+    request.setEntity(se);
+
+    String result = "";
+        
+    try (CloseableHttpClient httpClient = HttpClients.createDefault();
+         CloseableHttpResponse httpResponse = httpClient.execute(request);) {
+            HttpEntity response_entity = httpResponse.getEntity();
+            if (response_entity != null) {
+                result = EntityUtils.toString(response_entity);
+            }
+            else {
+                result = "{\"Error\":\"An error occured\"}";
+            }
+         }
+    return result;
+}
     /**
      * @param c_id
      * @return
@@ -174,84 +250,6 @@ public String addcontract(@RequestParam String cid) throws ParseException, IOExc
          }
     return result;
 }
-
-//[POST] Create a temporary token
-/**
- * @param cid
- * @param recipientid 
- * @return
- * @throws ParseException
- * @throws IOException
- */
-@GetMapping(value="/generatetoken")
-public String temptoken(@RequestParam String cid, @RequestParam String recipientid) throws ParseException, IOException {
-    String url = "https://api.sellandsign.com/api/v4/contracts/" + cid + "/transaction/temporarytoken";
-
-    HttpPost request = new HttpPost(url);
-    request.addHeader("accept", "application/json");
-    request.addHeader("j_token", token);
-    request.addHeader("Content-Type", "application/json");
-    
-    HashMap<String, Object> mypayload = new HashMap<String, Object>();
-    mypayload.put("actor_id", actor_id);
-    mypayload.put("contract_definition_id", cdi);
-    mypayload.put("recipient_id", Integer.parseInt(recipientid));
-    mypayload.put("validity_duration", 1667170800);
-    var gson = new Gson();
-    String jpayload = gson.toJson(mypayload);
-    StringEntity se = new StringEntity(jpayload, "UTF-8");
-    request.setEntity(se);
-
-    String result = "";
-        
-    try (CloseableHttpClient httpClient = HttpClients.createDefault();
-         CloseableHttpResponse httpResponse = httpClient.execute(request);) {
-            HttpEntity response_entity = httpResponse.getEntity();
-            if (response_entity != null) {
-                result = EntityUtils.toString(response_entity);
-            }
-            else {
-                result = "{\"Error\":\"An error occured\"}";
-            }
-         }
-    return result;
-}
-
-
-@GetMapping("/createcontractallinone")
-public String mynewtest() throws IOException {
-    String url = "https://api.sellandsign.com/api/v4/contracts/allinone?start=true";
-
-    HttpPost request = new HttpPost(url);
-    request.addHeader("accept", "application/json");
-    request.addHeader("j_token", token);
-    //request.addHeader("Content-Type", "application/json");
-    //request.addHeader("Content-Type", "multipart/form");
-
-    MultipartEntityBuilder builder = MultipartEntityBuilder.create();
-    builder.addTextBody("contract", "{\"name\": \"contract.pdf\",\"contract_definition_id\": 34422,\"vendor_email\": \"fo@calindasoftware.com\",\"message_title\": \"Votre document pour signature\",\"message_body\": \"Vous êtes signataire du contrat ci-après\",\"keep_on_move\": false, \"auto_close\": 1}");
-    builder.addTextBody("recipients", "{\"data\": [{\"civility\": \"MONSIEUR\",\"firstname\": \"Khalil\",\"lastname\": \"BHS\",\"address_1\": \"Rue de test\",\"address_2\": \"\",\"postal_code\": \"20156\",\"city\": \"\",\"cell_phone\": \"0021651353584\",\"email\": \"k.salah@oodrive.com\",\"signature_mode\": 11}]}");
-    File file = ResourceUtils.getFile("classpath:static/contract.pdf");
-    InputStream allinone = new FileInputStream(file);
-    builder.addBinaryBody("pdfparts", allinone, ContentType.create("application/pdf"), file.getName());
-
-    HttpEntity multipart = builder.build();
-    request.setEntity(multipart);
-
-    String result = "";
-        
-    try (CloseableHttpClient httpClient = HttpClients.createDefault();
-         CloseableHttpResponse httpResponse = httpClient.execute(request);) {
-            HttpEntity response_entity = httpResponse.getEntity();
-            if (response_entity != null) {
-                result = EntityUtils.toString(response_entity);
-            }
-            else {
-                result = "{\"Error\":\"An error occured\"}";
-            }
-         }
-    return result;
-    }
     //File file = ResourceUtils.getFile("/Users/k.salah/Desktop/1/khalilcontract.pdf");
     //InputStream is = new FileInputStream(file);
     //builder.addBinaryBody("pdfparts", is, ContentType.create("application/pdf"), file.getName());
