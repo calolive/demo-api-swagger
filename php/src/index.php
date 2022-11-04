@@ -1,12 +1,14 @@
 <?php
+    $ini = parse_ini_file('app.ini');
+
     session_start();
-    $_SESSION['base_url_swagger'] = "https://api.sellandsign.com/api/v4";
-    $_SESSION['token'] = "";
-    $_SESSION['cdi'] = 	0;
-    $_SESSION['contractor_id'] = 0;
-    $_SESSION['actor_id'] = 0;
-    
+    $_SESSION['base_url_swagger'] = $ini['base_url_swagger'];
+    $_SESSION['token'] = $ini['token'];;
+    $_SESSION['cdi'] = 	intval($ini['cdi']);
+    $_SESSION['contractor_id'] = intval($ini['contractor_id']);
+    $_SESSION['actor_id'] = intval($ini['actor_id']);    
 ?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -17,8 +19,8 @@
         <br><br>
         <div style="text-align: center">
            <button onclick="send_request('create-contract4.php')">Create contrat</button>
-           <button onclick="send_request('oneexpert.php')">Get status</button>
-           <select id="generate" onChange="generateOnSelect(this)">
+           <button onclick="send_request('get-status4.php')">Get status</button>
+           <select id="generate" onChange="generateOnSelect(this)" style="background-color:rgb(239, 239, 239);padding-top:1px;padding-bottom:1px;border-radius:2px">
                 <option value="" disabled selected>Create token</option>
             </select>
            <button onclick="redirect_to_sign()">Sign contract</button>
@@ -32,7 +34,7 @@
     <script>
             var infos = null;
             var contractor = null;
-            var lid = 19248 //Put your licence id here
+            var lid = 37846 //Put your licence id here
             function send_request(endpoint) {
                 var objXMLHttpRequest = new XMLHttpRequest();
                 objXMLHttpRequest.onreadystatechange = function() {
@@ -96,8 +98,9 @@
                 const message = document.getElementById('messagediv');
                 const iframe = document.getElementById('iframediv');
                 message.innerHTML = "";
+                const error = encodeURIComponent('https://bing.com');
                 const encoded = encodeURIComponent(infos.token);
-                const url = `https://cloud.sellandsign.com/calinda/s/generic_sign_contract_index.html?l_id=${lid}&direct_contract=${infos.cdi}&cd_id=${infos.cdi}&c_id=${infos.contract_id}&customer_number=${contractor}&page=1&no_ui=true&no_cookie=true&j_token=${encoded}`;                              
+                const url = `https://123.ota.sign.oodrive.com/calinda/sellandsign/#/contract/${infos.contract_id}/sign;c_id=${infos.contract_id};no_ui=true;refback=remote_signatory;errorback=${error};j_token=${encoded}`;
                 iframe.innerHTML = `<iframe width="1024" height="800" src="${url}"></iframe>`;
             }
 
@@ -105,8 +108,7 @@
                 const success = encodeURIComponent('https://www.google.com');
                 const error = encodeURIComponent('https://bing.com');
                 const encoded = encodeURIComponent(infos.token);
-                //const url = `https://qacss.calindasoftware.com/calinda/sellandsign/#/contract/${infos.contract_id}/sign;c_id=${infos.contract_id};no_ui=true;refback=${success};errorback=${error};j_token=${encoded}`;
-                const url = `https://cloud.sellandsign.com/calinda/sellandsign/#/contract/${infos.contract_id}/sign;c_id=${infos.contract_id};no_ui=true;refback=${success};errorback=${error};j_token=${encoded}`;
+                const url = `https://123.ota.sign.oodrive.com/calinda/sellandsign/#/contract/${infos.contract_id}/sign;c_id=${infos.contract_id};no_ui=true;refback=${success};errorback=${error};j_token=${encoded}`;
                 console.log(infos.contract_id);
                 console.log(contractor);
                 //location.href = url;

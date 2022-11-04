@@ -4,6 +4,8 @@
 #     https://www.atlassian.com/git/tutorials/saving-changes/gitignore
 
 HELP.md
+php/src/app.ini
+java/src/main/resources/static/config.json
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/

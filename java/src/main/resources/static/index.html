@@ -100,7 +100,8 @@
         const iframe = document.getElementById('iframediv');
         message.innerHTML = "";
         const encoded = encodeURIComponent(infos.token);
-        const url = `https://cloud.sellandsign.com/calinda/s/generic_sign_contract_index.html?l_id=1933&direct_contract=${infos.cdi}&cd_id=${infos.cdi}&c_id=${infos.contract_id}&customer_number=${contractor}&page=1&no_ui=true&j_token=${encoded}`;
+        const url = `https://123.ota.sign.oodrive.com/calinda/sellandsign/#/contract/${infos.contract_id}/sign;c_id=${infos.contract_id};no_ui=true;refback=remote_signatory;errorback=${error};j_token=${encoded}`;
+        //const url = `https://cloud.sellandsign.com/calinda/s/generic_sign_contract_index.html?l_id=1933&direct_contract=${infos.cdi}&cd_id=${infos.cdi}&c_id=${infos.contract_id}&customer_number=${contractor}&page=1&no_ui=true&j_token=${encoded}`;
         iframe.innerHTML = `<iframe width="1024" height="800" src="${url}"></iframe>`;
     }
 
