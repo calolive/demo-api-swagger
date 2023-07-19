@@ -11,23 +11,77 @@
 
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-    </head>
-    <body>
-        <img src="https://www.doasoft.com/assets/img/zlogoinv60x60.png">
-        <br><br>
-        <div style="text-align: center">
-           <button onclick="send_request('create-contract4.php')">Create contrat</button>
-           <button onclick="send_request('get-status4.php')">Get status</button>
-           <select id="generate" onChange="generateOnSelect(this)" style="background-color:rgb(239, 239, 239);padding-top:1px;padding-bottom:1px;border-radius:2px">
-                <option value="" disabled selected>Create token</option>
-            </select>
-           <button onclick="redirect_to_sign()">Sign contract</button>
-           <button onclick="disp_sign_iframe()">Sign contract if</button>
-           <button onclick="send_request('get-signed-contract4.php')">Download signed contract</button>      
-        </div>
-        <br><br>
+<head>
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <style>
+        body {
+            background-image: url('https://www.oodrive.com/wp-content/uploads/2022/01/fond-business-card-1-2-2048x210.png');
+            background-repeat: no-repeat;
+            background-size: 1400px;
+            background-position: center;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding-top: 30px;
+            overflow: hidden; /* Hide the scroll bar */
+        }
+
+        img {
+            width: 1000px;
+            height: 100px;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            background-color: #efefef;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 2px;
+            transition: background-color 0.3s ease;
+            background-image: linear-gradient(to bottom right, #e8e8e8, #c4c4c4);
+        }
+
+        .btn:hover {
+            background-image: linear-gradient(to bottom right, #c4c4c4, #e8e8e8);
+            font-size: 13px;
+            line-height: 15px;
+            font-weight: 50;
+            text-align: left;
+        }
+
+        .select {
+            background-color: #efefef;
+            padding: 4px;
+            border-radius: 2px;
+            margin: 4px;
+        }
+
+        #iframediv {
+            height: 800px;
+        }
+
+        #messagediv {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <img src="https://www.oodrive.com/wp-content/uploads/2021/12/LOGO-OODRIVE-2022-noir.svg">
+    <br><br>
+    <div >
+        <button onclick="send_request('create-contract4.php')" class="btn">Create Contract</button>
+        <button onclick="send_request('get-status4.php')" class="btn">Get Status</button>
+
+        <select id="generate" onchange="generateOnSelect(this)" class="select">
+            <option value="disabled selected" >Create Token</option>
+        </select>
+
+        <button onclick="redirect_to_sign()" class="btn">Sign Contract</button>
+        <button onclick="disp_sign_iframe()" class="btn">Sign Contract if</button>
+        <button onclick="send_request('get-signed-contract4.php')" class="btn">Download Signed Contract</button>
+    </div>
+ <br><br>
         <div id="messagediv"></div>
         <div id="iframediv" style="height:800px"></div>
     </body>
@@ -58,7 +112,8 @@
                             }
                             else {
                                 iframe.innerHTML = "";
-                                message.innerHTML = `<p>${myjson.response}<p>`;
+                                message.innerHTML = `<p>${myjson.response['Contract created successfully']}<p>`;
+
                                 if (endpoint.startsWith('create-token')) {
                                     infos.token = myjson.response;
                                 }
