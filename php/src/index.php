@@ -9,8 +9,11 @@
     $_SESSION['actor_id'] = intval($ini['actor_id']);    
 ?>
 
+
+
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <style>
@@ -22,7 +25,7 @@
             font-family: Arial, sans-serif;
             text-align: center;
             padding-top: 30px;
-            overflow: hidden; /* Hide the scroll bar */
+            
         }
 
         img {
@@ -31,7 +34,7 @@
             margin-bottom: 20px;
         }
 
-        .btn {
+        button {
             padding: 8px 16px;
             background-color: #efefef;
             border: none;
@@ -42,7 +45,7 @@
             background-image: linear-gradient(to bottom right, #e8e8e8, #c4c4c4);
         }
 
-        .btn:hover {
+        button:hover {
             background-image: linear-gradient(to bottom right, #c4c4c4, #e8e8e8);
             font-size: 13px;
             line-height: 15px;
@@ -61,29 +64,25 @@
             height: 800px;
         }
 
-        #messagediv {
-            margin-top: 20px;
-        }
+       
     </style>
 </head>
 <body>
     <img src="https://www.oodrive.com/wp-content/uploads/2021/12/LOGO-OODRIVE-2022-noir.svg">
     <br><br>
-    <div >
-        <button onclick="send_request('create-contract4.php')" class="btn">Create Contract</button>
-        <button onclick="send_request('get-status4.php')" class="btn">Get Status</button>
-
-        <select id="generate" onchange="generateOnSelect(this)" class="select">
-            <option value="disabled selected" >Create Token</option>
-        </select>
-
-        <button onclick="redirect_to_sign()" class="btn">Sign Contract</button>
-        <button onclick="disp_sign_iframe()" class="btn">Sign Contract if</button>
-        <button onclick="send_request('get-signed-contract4.php')" class="btn">Download Signed Contract</button>
-    </div>
- <br><br>
+        <div style="text-align: center">
+           <button onclick="send_request('create-contract4.php')">Create contrat</button>
+           <button onclick="send_request('get-status4.php')">Get status</button>
+           <select id="generate" onChange="generateOnSelect(this)" class="select" >
+                <option value="" disabled selected>Create token</option>
+            </select>
+           <button onclick="redirect_to_sign()">Sign contract</button>
+           <button onclick="disp_sign_iframe()">Sign contract if</button>
+           <button onclick="send_request('get-signed-contract4.php')">Download signed contract</button>      
+        </div>
+        <br><br>
         <div id="messagediv"></div>
-        <div id="iframediv" style="height:800px"></div>
+        <div id="iframediv" ></div>
     </body>
     <script>
             var infos = null;
@@ -112,8 +111,7 @@
                             }
                             else {
                                 iframe.innerHTML = "";
-                                message.innerHTML = `<p>${myjson.response['Contract created successfully']}<p>`;
-
+                                message.innerHTML = `<p>${myjson.response}<p>`;
                                 if (endpoint.startsWith('create-token')) {
                                     infos.token = myjson.response;
                                 }
@@ -170,4 +168,5 @@
                 window.open(url, '_blank');
             }
         </script>
+
 </html>

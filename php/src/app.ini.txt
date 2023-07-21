@@ -1,0 +1,5 @@
+base_url_swagger = "https://api.sellandsign.com/api/v4";
+token = "";
+cdi = ;
+contractor_id = 0;
+actor_id = 0;
